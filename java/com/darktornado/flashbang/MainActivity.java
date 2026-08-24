@@ -43,8 +43,8 @@ public class MainActivity extends Activity {
                     bang[0].start();
                 } else {
                     try {
-                        cm.setTorchMode(cm.getCameraIdList()[0], false);
                         bang[0].interrupt();
+                        cm.setTorchMode(cm.getCameraIdList()[0], false);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
