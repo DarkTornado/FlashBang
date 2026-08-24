@@ -4,8 +4,10 @@ import android.app.Activity;
 import android.content.Context;
 import android.hardware.camera2.CameraManager;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.ToggleButton;
 
 public class MainActivity extends Activity {
@@ -53,6 +55,12 @@ public class MainActivity extends Activity {
             }
         });
         layout.addView(btn);
+
+        TextView txt = new TextView(this);
+        txt.setText("\n© 2026 Dark Tornado, All rights reserved.\n");
+        txt.setTextSize(13);
+        txt.setGravity(Gravity.CENTER);
+        layout.addView(txt);
 
         int pad = dip2px(16);
         layout.setPadding(pad, pad, pad, pad);
