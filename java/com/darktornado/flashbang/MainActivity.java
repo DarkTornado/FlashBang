@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.Gravity;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
@@ -64,7 +65,9 @@ public class MainActivity extends Activity {
 
         int pad = dip2px(16);
         layout.setPadding(pad, pad, pad, pad);
-        setContentView(layout);
+        ScrollView scroll = new ScrollView(this);
+        layout.addView(scroll);
+        setContentView(scroll);
     }
 
     private int dip2px(int dips) {
