@@ -26,6 +26,7 @@ public class MainActivity extends Activity {
         btn.setTextOn("Flash Bang");
         btn.setTextOff("Flash Bang");
         btn.setTransformationMethod(null);
+        btn.setChecked(false);
         btn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton toggle, boolean onoff) {
