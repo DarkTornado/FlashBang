@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.Gravity;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.ToggleButton;
@@ -22,6 +24,29 @@ public class MainActivity extends Activity {
         LinearLayout layout = new LinearLayout(this);
         layout.setOrientation(1);
 
+        TextView txt = new TextView(this);
+        txt.setText("반짝이는 주기 : ");
+        txt.setTextSize(18);
+        layout.addView(txt);
+
+        String[] menus = {"0.1초", "0.5초", "1초"};
+        final int[] delay = {50, 250, 500, 50};
+        final RadioGroup radios = new RadioGroup(this);
+        for (int n = 0; n < menus.length; n++) {
+            RadioButton radio = new RadioButton(this);
+            radio.setText(menus[n]);
+            radio.setId(n);
+            radios.addView(radio);
+            if (n == 0) radio.setChecked(true);
+        }
+        radios.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                delay[3] = delay[i];
+            }
+        });
+        layout.addView(radios);
+
         ToggleButton btn = new ToggleButton(this);
         btn.setTextOn("Flash Bang");
         btn.setTextOff("Flash Bang");
@@ -36,9 +61,9 @@ public class MainActivity extends Activity {
                             String camera = cm.getCameraIdList()[0];
                             for (; ; ) {
                                 cm.setTorchMode(camera, true);
-                                Thread.sleep(50);
+                                Thread.sleep(delay[3]);
                                 cm.setTorchMode(camera, false);
-                                Thread.sleep(50);
+                                Thread.sleep(delay[3]);
                             }
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -58,16 +83,16 @@ public class MainActivity extends Activity {
         });
         layout.addView(btn);
 
-        TextView txt = new TextView(this);
-        txt.setText("\n© 2026 Dark Tornado, All rights reserved.\n");
-        txt.setTextSize(13);
-        txt.setGravity(Gravity.CENTER);
-        layout.addView(txt);
+        TextView maker = new TextView(this);
+        maker.setText("\n© 2026 Dark Tornado, All rights reserved.\n");
+        maker.setTextSize(13);
+        maker.setGravity(Gravity.CENTER);
+        layout.addView(maker);
 
         int pad = dip2px(16);
         layout.setPadding(pad, pad, pad, pad);
         ScrollView scroll = new ScrollView(this);
-        layout.addView(scroll);
+        scroll.addView(layout);
         setContentView(scroll);
     }
 
